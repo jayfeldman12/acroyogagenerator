@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 const baseUrl = 'https://acroyoga757.com';
@@ -16,8 +16,30 @@ const getRandomPose = (): string => {
   return poses[Math.floor(Math.random() * poses.length)];
 };
 
+const defaultPoseWidth = 500;
+const defaultPoseHeight = 625;
+
+const defaultReloadWidth = 300;
+const defaultReloadHeight = 50;
+
 function App() {
   const [activePose, setActivePose] = useState(getRandomPose());
+  const [windowWidth, setWindowWidth] = useState(500);
+  useEffect(() => {
+    const updateDimensions = () => {
+      const width = window.innerWidth;
+      setWindowWidth(width);
+    };
+
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
+  const getScaledDimensions = (defaultWidth: number, defaultHeight: number) => {
+    const width = Math.min(defaultWidth, windowWidth);
+    const height = (width / defaultWidth) * defaultHeight;
+    return { width, height };
+  };
 
   const setNewPose = () => {
     let newPose = getRandomPose();
@@ -27,6 +49,15 @@ function App() {
     }
     setActivePose(newPose);
   };
+
+  const { width: poseWidth, height: poseHeight } = getScaledDimensions(
+    defaultPoseWidth,
+    defaultPoseHeight
+  );
+  const { width: reloadWidth, height: reloadHeight } = getScaledDimensions(
+    defaultReloadWidth,
+    defaultReloadHeight
+  );
 
   return (
     <div className="App">
@@ -41,14 +72,18 @@ function App() {
       <br />
       <img
         src={`${imagesPath}/${reloadButtonUrl}`}
-        width="300"
-        height="50"
+        width={reloadWidth}
+        height={reloadHeight}
         style={{ marginTop: 20, cursor: 'pointer' }}
         alt="Reload pose"
         onClick={setNewPose}
       />
       <br />
-      <img src={activePose} alt="Pose" style={{ marginTop: 20 }} />
+      <img
+        src={activePose}
+        alt="Pose"
+        style={{ marginTop: 20, width: poseWidth, height: poseHeight }}
+      />
     </div>
   );
 }
