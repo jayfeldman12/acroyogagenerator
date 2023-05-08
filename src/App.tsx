@@ -62,14 +62,16 @@ function App() {
 
   return (
     <div className="App">
-      <h1>ACRO POSE GENERATOR</h1>
-      <p>
-        <strong>"FLOOR IS LAVA" ACRO GAME</strong>
-      </p>
-      <em>
-        Start in one pose, click NEW POSE, and try to go to new pose in the fewest transitions (2,
-        1, 0) without touching the floor.
-      </em>
+      <div className="TextContainer">
+        <h1>ACRO POSE GENERATOR</h1>
+        <p>
+          <strong>"FLOOR IS LAVA" ACRO GAME</strong>
+        </p>
+        <em>
+          Start in one pose, click NEW POSE, and try to go to new pose in the fewest transitions (2,
+          1, 0) without touching the floor.
+        </em>
+      </div>
       <br />
       <img
         src={`${imagesPath}/${reloadButtonUrl}`}
