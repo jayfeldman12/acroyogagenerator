@@ -42,7 +42,7 @@ function App() {
         src={`${imagesPath}/${reloadButtonUrl}`}
         width="300"
         height="50"
-        style={{ marginTop: 20 }}
+        style={{ marginTop: 20, cursor: 'pointer' }}
         alt="Reload pose"
         onClick={() => setActivePose(getRandomPose())}
       />
