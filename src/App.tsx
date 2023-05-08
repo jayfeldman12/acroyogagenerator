@@ -25,6 +25,7 @@ const defaultReloadHeight = 50;
 function App() {
   const [activePose, setActivePose] = useState(getRandomPose());
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   useEffect(() => {
     const updateDimensions = () => {
       const width = window.innerWidth;
@@ -36,7 +37,7 @@ function App() {
   }, []);
 
   const getScaledDimensions = (defaultWidth: number, defaultHeight: number) => {
-    const width = Math.min(defaultWidth, windowWidth);
+    const width = Math.min(defaultWidth, windowWidth - 30);
     const height = (width / defaultWidth) * defaultHeight;
     return { width, height };
   };
