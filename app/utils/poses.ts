@@ -14,7 +14,7 @@ export interface Pose {
   transitions: number[];
 }
 
-export const startingPoses = [1];
+export const startingPoses = [1, 17, 22, 30, 46, 57];
 
 export const poses: Pose[] = [
   {

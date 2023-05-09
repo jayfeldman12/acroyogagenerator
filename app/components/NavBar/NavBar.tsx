@@ -15,9 +15,9 @@ const routes: Route[] = [
 
 const NavBar = () => {
   return (
-    <div id="Container">
+    <div id="Container" role="navigation">
       {routes.map((route) => (
-        <Link id="Link" href={route.href}>
+        <Link id="Link" href={route.href} role="link">
           {route.name}
         </Link>
       ))}

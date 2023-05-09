@@ -1,12 +1,23 @@
 .FlowGenerator {
   text-align: center;
   align-items: center;
-  margin-bottom: 100px;
+  margin: 0px 40px;
+  padding-bottom: 60px;
 }
 
 .TextContainer {
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 0px 20px;
+}
+
+#Flow {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#Pose {
+  margin-bottom: 20px;
 }
 
 h1 {

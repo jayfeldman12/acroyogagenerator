@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import PoseImage from '../components/PoseImage';
 import { Pose, poses, startingPoses } from '../utils/poses';
+import FlowControls from './FlowControls';
 import './FlowGenerator.css';
 
 const startFlow = () => {
@@ -15,6 +16,18 @@ const getNextPoseInFlow = (pose: Pose): Pose => {
 
 const FlowGenerator = () => {
   const [activeFlow, setActiveFlow] = useState([startFlow()]);
+  const finalIndex = activeFlow.length - 1;
+
+  const regenerateCurrentPose = () => {
+    setActiveFlow((currentFlow) => [
+      ...currentFlow.slice(0, finalIndex),
+      getNextPoseInFlow(activeFlow[finalIndex]),
+    ]);
+  };
+
+  const addNewPose = () => {
+    setActiveFlow((currentFlow) => [...currentFlow, getNextPoseInFlow(activeFlow[finalIndex])]);
+  };
 
   return (
     <div className="FlowGenerator">
@@ -28,9 +41,16 @@ const FlowGenerator = () => {
       </div>
       <br />
       <br />
-      {activeFlow.map((pose) => (
-        <PoseImage pose={pose} scale={0.5} />
-      ))}
+      <div id="Flow">
+        {activeFlow.map((pose, index) => {
+          return (
+            <div id="Pose">
+              <PoseImage pose={pose} scale={0.3} />
+            </div>
+          );
+        })}
+      </div>
+      <FlowControls regenerate={regenerateCurrentPose} next={addNewPose} />
     </div>
   );
 };

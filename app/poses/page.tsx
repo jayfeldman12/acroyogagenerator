@@ -41,7 +41,12 @@ const AllPoses = () => {
           value={searchText}
         />
 
-        <span id="Cancel" onClick={() => setSearchText('')}>
+        <span
+          id="Cancel"
+          onClick={() => setSearchText('')}
+          role="button"
+          aria-label="Reset search text"
+        >
           ⊗
         </span>
       </div>
