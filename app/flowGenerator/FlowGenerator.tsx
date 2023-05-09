@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import PoseImage from '../components/PoseImage';
-import { Pose, poseFlows, posePathToUrl } from '../utils/poses';
+import { Pose, poseFlows, posePathToUrl, startingPoses } from '../utils/poses';
 import './FlowGenerator.css';
 
 const startFlow = () => {
-  return poseFlows[Math.floor(Math.random() * (poseFlows.length - 1) + 1)];
+  return poseFlows[startingPoses[Math.floor(Math.random() * startingPoses.length)]];
 };
 
 const getNextPoseInFlow = (pose: Pose): Pose => {

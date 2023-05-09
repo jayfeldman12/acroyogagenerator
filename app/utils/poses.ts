@@ -20,6 +20,8 @@ export interface Pose {
   transitions: number[];
 }
 
+export const startingPoses = [1];
+
 export const poseFlows: Pose[] = [
   {
     id: 0,
