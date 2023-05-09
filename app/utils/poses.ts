@@ -27,7 +27,7 @@ export const poses: Pose[] = [
     id: 1,
     name: 'Bird / Plank',
     path: '001',
-    transitions: [1, 2, 31, 46, 74, 76],
+    transitions: [2, 31, 46, 74, 76],
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ export const poses: Pose[] = [
     id: 3,
     name: 'Shin to hand balance Gate',
     path: '003',
-    transitions: [1, 3, 14, 27, 58],
+    transitions: [1, 7, 14, 27, 58],
   },
   {
     id: 4,
@@ -93,13 +93,13 @@ export const poses: Pose[] = [
     id: 12,
     name: 'Butterfly knife',
     path: '012',
-    transitions: [4, 12, 25, 36, 41, 56, 67],
+    transitions: [4, 18, 25, 36, 41, 56, 67],
   },
   {
     id: 13,
     name: 'Dragonfly / Dead bug float',
     path: '013',
-    transitions: [11, 13, 23, 31, 42, 58],
+    transitions: [11, 15, 23, 31, 42, 58],
   },
   {
     id: 14,
@@ -115,9 +115,9 @@ export const poses: Pose[] = [
   },
   {
     id: 16,
-    name: 'Foot to hand low F2H',
+    name: 'Foot to hand low (F2H)',
     path: '016',
-    transitions: [3, 7, 16, 32, 47, 62],
+    transitions: [3, 7, 18, 32, 47, 62],
   },
   {
     id: 17,

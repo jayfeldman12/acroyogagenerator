@@ -1,6 +1,6 @@
 # Acroyoga Generator
 
-This is a basic app to create a generator of random acroyoga poses. Right now, the functionality is just randomly selecting an pose and reloading that pose. More functionality to come!
+This site is used to inspire acro flows. Use the pose generator to create challenges to transition between moves, the flow generator to get a random sequence of poses, or search our pose database.
 
 Made for the Acroyoga 757 group.
 
