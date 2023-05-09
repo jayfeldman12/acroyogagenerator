@@ -47,7 +47,7 @@ const FlowGenerator = () => {
         {activeFlow.map((pose, index) => {
           return (
             <div id="Pose">
-              <PoseImage pose={pose} scale={getScale(0.4, dimensions)} />
+              <PoseImage pose={pose} scale={getScale(0.5, dimensions)} />
             </div>
           );
         })}
