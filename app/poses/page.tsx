@@ -2,7 +2,9 @@
 
 import { useMemo, useState } from 'react';
 import PoseImage from '../components/PoseImage';
+import { useWindowSizeContext } from '../context/WindowSizeContext';
 import { poses } from '../utils/poses';
+import { getScale } from '../utils/scale';
 import './Page.css';
 
 const actualPoses = poses.filter((pose) => pose.path);
@@ -13,6 +15,7 @@ const cleanText = (text: string): string => {
 };
 
 const AllPoses = () => {
+  const dimensions = useWindowSizeContext();
   const [searchText, setSearchText] = useState('');
 
   const filteredPoses = useMemo(() => {
@@ -54,7 +57,7 @@ const AllPoses = () => {
       <br />
       <div className="PoseContainer">
         {filteredPoses.map((pose) => (
-          <PoseImage pose={pose} scale={0.3} />
+          <PoseImage pose={pose} scale={getScale(0.4, dimensions)} />
         ))}
       </div>
     </div>

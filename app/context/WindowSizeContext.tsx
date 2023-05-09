@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 
-interface WindowSize {
+export interface WindowSize {
   windowWidth: number;
   windowHeight: number;
 }

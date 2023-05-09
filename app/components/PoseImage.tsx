@@ -1,6 +1,6 @@
 import { useWindowSizeContext } from '../context/WindowSizeContext';
-import { getScaledDimensions } from '../utils/getScaledDimensions';
 import { Pose, defaultPoseHeight, defaultPoseWidth, posePathToUrl } from '../utils/poses';
+import { getScaledDimensions } from '../utils/scale';
 
 interface PoseImageProps {
   pose: Pose;

@@ -3,15 +3,17 @@
 import { useState } from 'react';
 import PoseImage from '../components/PoseImage';
 import { useWindowSizeContext } from '../context/WindowSizeContext';
-import { getScaledDimensions } from '../utils/getScaledDimensions';
 import { Pose, poses } from '../utils/poses';
+import { getScale, getScaledDimensions } from '../utils/scale';
 import { imagePath } from '../utils/url';
 import './PoseGenerator.css';
 
 const reloadButtonUrl = `${imagePath}/ClickForNewPose.png`;
 
+const actualPoses = poses.slice(1);
+
 const getRandomPose = (): Pose => {
-  return poses[Math.floor(Math.random() * poses.length)];
+  return actualPoses[Math.floor(Math.random() * actualPoses.length)];
 };
 
 const defaultReloadWidth = 300;
@@ -19,7 +21,8 @@ const defaultReloadHeight = 50;
 
 const PoseGenerator = () => {
   const [activePose, setActivePose] = useState(getRandomPose());
-  const { windowWidth } = useWindowSizeContext();
+  const dimensions = useWindowSizeContext();
+  const { windowWidth } = dimensions;
 
   const setNewPose = () => {
     let newPose = getRandomPose();
@@ -59,7 +62,7 @@ const PoseGenerator = () => {
       />
       <br />
       <div style={{ marginTop: 20 }} />
-      <PoseImage pose={activePose} />
+      <PoseImage pose={activePose} scale={getScale(0.8, dimensions)} />
     </div>
   );
 };

@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import PoseImage from '../components/PoseImage';
+import { useWindowSizeContext } from '../context/WindowSizeContext';
 import { Pose, poses, startingPoses } from '../utils/poses';
+import { getScale } from '../utils/scale';
 import FlowControls from './FlowControls';
 import './FlowGenerator.css';
 
 const startFlow = () => {
-  return poses[startingPoses[Math.floor(Math.random() * startingPoses.length)]];
+  return [poses[startingPoses[Math.floor(Math.random() * startingPoses.length)]]];
 };
 
 const getNextPoseInFlow = (pose: Pose): Pose => {
@@ -15,7 +17,8 @@ const getNextPoseInFlow = (pose: Pose): Pose => {
 };
 
 const FlowGenerator = () => {
-  const [activeFlow, setActiveFlow] = useState([startFlow()]);
+  const [activeFlow, setActiveFlow] = useState(startFlow());
+  const dimensions = useWindowSizeContext();
   const finalIndex = activeFlow.length - 1;
 
   const regenerateCurrentPose = () => {
@@ -37,7 +40,6 @@ const FlowGenerator = () => {
           <strong>"MATCH THE FLOW" ACRO GAME</strong>
         </p>
         <em>Start in one pose, click NEXT POSE, and try to get to the next pose</em>
-        <p style={{ fontSize: 30, fontWeight: 'bold' }}>In Progress!</p>
       </div>
       <br />
       <br />
@@ -45,12 +47,16 @@ const FlowGenerator = () => {
         {activeFlow.map((pose, index) => {
           return (
             <div id="Pose">
-              <PoseImage pose={pose} scale={0.3} />
+              <PoseImage pose={pose} scale={getScale(0.4, dimensions)} />
             </div>
           );
         })}
       </div>
-      <FlowControls regenerate={regenerateCurrentPose} next={addNewPose} />
+      <FlowControls
+        regenerate={regenerateCurrentPose}
+        next={addNewPose}
+        clear={() => setActiveFlow(startFlow())}
+      />
     </div>
   );
 };

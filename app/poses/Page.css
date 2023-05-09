@@ -1,6 +1,7 @@
 .AllPoses {
   align-items: center;
   text-align: center;
+  margin: 20px;
 }
 
 .PoseContainer {
