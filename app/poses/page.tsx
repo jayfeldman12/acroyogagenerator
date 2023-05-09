@@ -48,11 +48,8 @@ const AllPoses = () => {
       <br />
       <br />
       <div className="PoseContainer">
-        {filteredPoses.map((pose, index) => (
-          <div>
-            <PoseImage pose={pose} scale={0.3} />
-            <p>{index + 1}</p>
-          </div>
+        {filteredPoses.map((pose) => (
+          <PoseImage pose={pose} scale={0.3} />
         ))}
       </div>
     </div>

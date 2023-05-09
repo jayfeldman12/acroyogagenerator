@@ -24,6 +24,7 @@ const FlowGenerator = () => {
           <strong>"MATCH THE FLOW" ACRO GAME</strong>
         </p>
         <em>Start in one pose, click NEXT POSE, and try to get to the next pose</em>
+        <p style={{ fontSize: 30, fontWeight: 'bold' }}>In Progress!</p>
       </div>
       <br />
       <br />
