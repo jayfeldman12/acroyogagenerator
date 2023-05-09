@@ -11,12 +11,12 @@ const FlowControls: React.FC<FlowControlProps> = ({ clear, regenerate, next }) =
   const clearRef = useRef<HTMLButtonElement>(null);
 
   const onNextPosePress = () => {
-    next();
     window.requestAnimationFrame(() => {
       // Pressing this will sometimes make enough content so the new pose is not visible,
       // so after next render, scroll to bottom button
       clearRef.current?.scrollIntoView({ behavior: 'smooth' });
     });
+    next();
   };
 
   return (
