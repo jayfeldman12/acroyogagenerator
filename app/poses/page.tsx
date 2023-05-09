@@ -21,7 +21,7 @@ const AllPoses = () => {
   const filteredPoses = useMemo(() => {
     const cleanSearchText = cleanText(searchText);
     if (cleanSearchText) {
-      return poses.filter((pose) => cleanText(pose.name).includes(cleanSearchText));
+      return actualPoses.filter((pose) => cleanText(pose.name).includes(cleanSearchText));
     }
     return actualPoses;
   }, [searchText]);
@@ -57,7 +57,7 @@ const AllPoses = () => {
       <br />
       <div className="PoseContainer">
         {filteredPoses.map((pose) => (
-          <PoseImage pose={pose} scale={getScale(0.4, dimensions)} />
+          <PoseImage key={pose.id} pose={pose} scale={getScale(0.4, dimensions)} />
         ))}
       </div>
     </div>

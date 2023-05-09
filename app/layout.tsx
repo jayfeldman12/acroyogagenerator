@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="apple-touch-icon"
           href="https://acroyoga757.com/wp-content/uploads/2019/11/cropped-AcroYoga757com-PashiFloatStk1-URL-blk-512x512-32x32.jpg"
         />
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <link rel="manifest" href="manifest.json" />
         <title>Acro Yoga Poses</title>
       </head>
       <body>

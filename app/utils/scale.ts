@@ -17,6 +17,6 @@ export const getScale = (relativeScale: number, dimensions: WindowSize) => {
   const min = relativeScale * 0.6;
   const { windowWidth, windowHeight } = dimensions;
   const userDimensions = (windowWidth + windowHeight) / 2;
-  console.log('dim', userDimensions, standardDimensions);
+
   return Math.min(Math.max(min, (userDimensions / standardDimensions) * relativeScale), max);
 };

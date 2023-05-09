@@ -25,11 +25,10 @@ const PoseGenerator = () => {
   const { windowWidth } = dimensions;
 
   const setNewPose = () => {
-    let newPose = getRandomPose();
-    while (newPose === activePose) {
-      // Ensures that the new image doesn't happen to be the same as the old image
+    let newPose: Pose;
+    do {
       newPose = getRandomPose();
-    }
+    } while (newPose === activePose);
     setActivePose(newPose);
   };
 

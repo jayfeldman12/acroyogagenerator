@@ -29,7 +29,11 @@ const FlowGenerator = () => {
   };
 
   const addNewPose = () => {
-    setActiveFlow((currentFlow) => [...currentFlow, getNextPoseInFlow(activeFlow[finalIndex])]);
+    let newPose: Pose;
+    do {
+      newPose = getNextPoseInFlow(activeFlow[finalIndex]);
+    } while (newPose === activeFlow[finalIndex - 1]);
+    setActiveFlow((currentFlow) => [...currentFlow, newPose]);
   };
 
   return (
@@ -46,7 +50,7 @@ const FlowGenerator = () => {
       <div id="Flow">
         {activeFlow.map((pose, index) => {
           return (
-            <div id="Pose">
+            <div id="Pose" key={`id${pose.id}index${index}`}>
               <PoseImage pose={pose} scale={getScale(0.5, dimensions)} />
             </div>
           );
