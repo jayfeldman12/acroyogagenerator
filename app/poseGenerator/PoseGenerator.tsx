@@ -1,26 +1,18 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
+import PoseImage from '../components/PoseImage';
+import { useWindowSizeContext } from '../context/WindowSizeContext';
+import { getScaledDimensions } from '../utils/getScaledDimensions';
+import { poses } from '../utils/poses';
+import { imagePath } from '../utils/url';
 import './PoseGenerator.css';
-import { useWindowSizeContext } from './context/WindowSizeContext';
 
-const baseUrl = 'https://acroyoga757.com';
-const imagesPath = `${baseUrl}/acroimages`;
-const reloadButtonUrl = 'ClickForNewPose.png';
-
-const poses = Array(76)
-  .fill('')
-  .map((_, index) => {
-    const imageNumber = index.toString().padStart(3, '0'); // Converts 4 => 004, 34 => 034 etc
-    return `${imagesPath}/image-${imageNumber}.jpg`;
-  });
+const reloadButtonUrl = `${imagePath}/ClickForNewPose.png`;
 
 const getRandomPose = (): string => {
   return poses[Math.floor(Math.random() * poses.length)];
 };
-
-const defaultPoseWidth = 500;
-const defaultPoseHeight = 625;
 
 const defaultReloadWidth = 300;
 const defaultReloadHeight = 50;
@@ -28,15 +20,6 @@ const defaultReloadHeight = 50;
 const PoseGenerator = () => {
   const [activePose, setActivePose] = useState(getRandomPose());
   const { windowWidth } = useWindowSizeContext();
-
-  const getScaledDimensions = useCallback(
-    (defaultWidth: number, defaultHeight: number) => {
-      const width = Math.min(defaultWidth, windowWidth - 30);
-      const height = (width / defaultWidth) * defaultHeight;
-      return { width, height };
-    },
-    [windowWidth]
-  );
 
   const setNewPose = () => {
     let newPose = getRandomPose();
@@ -47,13 +30,10 @@ const PoseGenerator = () => {
     setActivePose(newPose);
   };
 
-  const { width: poseWidth, height: poseHeight } = getScaledDimensions(
-    defaultPoseWidth,
-    defaultPoseHeight
-  );
   const { width: reloadWidth, height: reloadHeight } = getScaledDimensions(
     defaultReloadWidth,
-    defaultReloadHeight
+    defaultReloadHeight,
+    windowWidth
   );
 
   return (
@@ -70,7 +50,7 @@ const PoseGenerator = () => {
       </div>
       <br />
       <img
-        src={`${imagesPath}/${reloadButtonUrl}`}
+        src={reloadButtonUrl}
         width={reloadWidth}
         height={reloadHeight}
         style={{ marginTop: 20, cursor: 'pointer' }}
@@ -78,11 +58,8 @@ const PoseGenerator = () => {
         onClick={setNewPose}
       />
       <br />
-      <img
-        src={activePose}
-        alt="Pose"
-        style={{ marginTop: 20, width: poseWidth, height: poseHeight }}
-      />
+      <div style={{ marginTop: 20 }} />
+      <PoseImage src={activePose} />
     </div>
   );
 };

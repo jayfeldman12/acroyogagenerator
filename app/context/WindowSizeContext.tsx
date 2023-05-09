@@ -26,7 +26,6 @@ export const WindowSizeContext = ({ children }: { children: React.ReactNode }) =
 
   useEffect(() => {
     function handleResize() {
-      console.log('checking resize', window.innerWidth);
       setWindowSize({
         windowWidth: window.innerWidth,
         windowHeight: window.innerHeight,
