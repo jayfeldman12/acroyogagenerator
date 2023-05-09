@@ -2,22 +2,19 @@
 
 import { useState } from 'react';
 import PoseImage from '../components/PoseImage';
-import { Pose, poseFlows, posePathToUrl, startingPoses } from '../utils/poses';
+import { Pose, poses, startingPoses } from '../utils/poses';
 import './FlowGenerator.css';
 
 const startFlow = () => {
-  return poseFlows[startingPoses[Math.floor(Math.random() * startingPoses.length)]];
+  return poses[startingPoses[Math.floor(Math.random() * startingPoses.length)]];
 };
 
 const getNextPoseInFlow = (pose: Pose): Pose => {
-  return poseFlows[pose.transitions[Math.floor(Math.random() * pose.transitions.length)]];
+  return poses[pose.transitions[Math.floor(Math.random() * pose.transitions.length)]];
 };
 
 const FlowGenerator = () => {
   const [activeFlow, setActiveFlow] = useState([startFlow()]);
-
-  console.log('flow', startFlow());
-  console.log('path', startFlow().path);
 
   return (
     <div className="FlowGenerator">
@@ -31,7 +28,7 @@ const FlowGenerator = () => {
       <br />
       <br />
       {activeFlow.map((pose) => (
-        <PoseImage src={posePathToUrl(pose.path)} scale={0.5} />
+        <PoseImage pose={pose} scale={0.5} />
       ))}
     </div>
   );

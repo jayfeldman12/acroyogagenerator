@@ -4,13 +4,13 @@ import { useState } from 'react';
 import PoseImage from '../components/PoseImage';
 import { useWindowSizeContext } from '../context/WindowSizeContext';
 import { getScaledDimensions } from '../utils/getScaledDimensions';
-import { poses } from '../utils/poses';
+import { Pose, poses } from '../utils/poses';
 import { imagePath } from '../utils/url';
 import './PoseGenerator.css';
 
 const reloadButtonUrl = `${imagePath}/ClickForNewPose.png`;
 
-const getRandomPose = (): string => {
+const getRandomPose = (): Pose => {
   return poses[Math.floor(Math.random() * poses.length)];
 };
 
@@ -59,7 +59,7 @@ const PoseGenerator = () => {
       />
       <br />
       <div style={{ marginTop: 20 }} />
-      <PoseImage src={activePose} />
+      <PoseImage pose={activePose} />
     </div>
   );
 };

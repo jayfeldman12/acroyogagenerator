@@ -1,21 +1,22 @@
 import { useWindowSizeContext } from '../context/WindowSizeContext';
 import { getScaledDimensions } from '../utils/getScaledDimensions';
-import { defaultPoseHeight, defaultPoseWidth } from '../utils/poses';
+import { Pose, defaultPoseHeight, defaultPoseWidth, posePathToUrl } from '../utils/poses';
 
 interface PoseImageProps {
-  src: string;
+  pose: Pose;
   scale?: number;
 }
 
-const PoseImage: React.FC<PoseImageProps> = ({ src, scale = 1 }) => {
+const PoseImage: React.FC<PoseImageProps> = ({ pose, scale = 1 }) => {
   const { windowWidth } = useWindowSizeContext();
+  const path = posePathToUrl(pose);
 
   const { width: poseWidth, height: poseHeight } = getScaledDimensions(
     defaultPoseWidth * scale,
     defaultPoseHeight * scale,
     windowWidth
   );
-  return <img src={src} alt="Pose" style={{ width: poseWidth, height: poseHeight }} />;
+  return <img src={path} alt={pose.name} style={{ width: poseWidth, height: poseHeight }} />;
 };
 
 export default PoseImage;
