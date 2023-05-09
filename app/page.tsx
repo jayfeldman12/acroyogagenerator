@@ -1,4 +1,4 @@
-import PoseGenerator from './poseGenerator/PoseGenerator';
+import PoseGenerator from './poseGenerator/page';
 
 const Page = () => {
   return <PoseGenerator />;
