@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
+'use client';
+
+import { useCallback, useState } from 'react';
+import './PoseGenerator.css';
+import { useWindowSizeContext } from './context/WindowSizeContext';
 
 const baseUrl = 'https://acroyoga757.com';
 const imagesPath = `${baseUrl}/acroimages`;
@@ -22,25 +25,18 @@ const defaultPoseHeight = 625;
 const defaultReloadWidth = 300;
 const defaultReloadHeight = 50;
 
-function App() {
+const PoseGenerator = () => {
   const [activePose, setActivePose] = useState(getRandomPose());
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const { windowWidth } = useWindowSizeContext();
 
-  useEffect(() => {
-    const updateDimensions = () => {
-      const width = window.innerWidth;
-      setWindowWidth(width);
-    };
-
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
-  }, []);
-
-  const getScaledDimensions = (defaultWidth: number, defaultHeight: number) => {
-    const width = Math.min(defaultWidth, windowWidth - 30);
-    const height = (width / defaultWidth) * defaultHeight;
-    return { width, height };
-  };
+  const getScaledDimensions = useCallback(
+    (defaultWidth: number, defaultHeight: number) => {
+      const width = Math.min(defaultWidth, windowWidth - 30);
+      const height = (width / defaultWidth) * defaultHeight;
+      return { width, height };
+    },
+    [windowWidth]
+  );
 
   const setNewPose = () => {
     let newPose = getRandomPose();
@@ -61,7 +57,7 @@ function App() {
   );
 
   return (
-    <div className="App">
+    <div className="PoseGenerator">
       <div className="TextContainer">
         <h1>ACRO POSE GENERATOR</h1>
         <p>
@@ -89,6 +85,6 @@ function App() {
       />
     </div>
   );
-}
+};
 
-export default App;
+export default PoseGenerator;

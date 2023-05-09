@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import PoseGenerator from './PoseGenerator';
 
 test('renders acroyoga site link', () => {
-  render(<App />);
+  render(<PoseGenerator />);
   const linkElement = screen.getByText(/ACRO POSE GENERATOR/i);
   expect(linkElement).toBeInTheDocument();
 });
