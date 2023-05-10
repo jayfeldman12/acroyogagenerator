@@ -17,6 +17,8 @@ const cleanText = (text: string): string => {
 const AllPoses = () => {
   const dimensions = useWindowSizeContext();
   const [searchText, setSearchText] = useState('');
+  const [debugPressCount, setDebugPressCount] = useState(0);
+  const debugEnabled = debugPressCount >= 5;
 
   const filteredPoses = useMemo(() => {
     const cleanSearchText = cleanText(searchText);
@@ -33,8 +35,9 @@ const AllPoses = () => {
   return (
     <div className="AllPoses">
       <div className="TextContainer">
-        <h1>ALL POSES</h1>
+        <h1 onClick={() => setDebugPressCount((count) => count + 1)}>ALL POSES</h1>
       </div>
+      {debugEnabled ? <p id="Debug">ID mode enabled</p> : null}
       <div id="InputContainer">
         <input
           id="SearchInput"
@@ -57,7 +60,10 @@ const AllPoses = () => {
       <br />
       <div className="PoseContainer">
         {filteredPoses.map((pose) => (
-          <PoseImage key={pose.id} pose={pose} scale={getScale(0.4, dimensions)} />
+          <span>
+            <PoseImage key={pose.id} pose={pose} scale={getScale(0.4, dimensions)} />
+            {debugEnabled ? <p>{pose.id}</p> : null}
+          </span>
         ))}
       </div>
     </div>
