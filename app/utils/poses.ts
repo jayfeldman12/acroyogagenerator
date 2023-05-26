@@ -14,7 +14,7 @@ export interface Pose {
   transitions: number[];
 }
 
-export const startingPoses = [1, 17, 22, 30, 46, 57];
+export const startingPoses = [1, 6, 8, 9, 17, 18, 19, 24, 26, 32, 33, 39, 56, 57, 64, 72, 74];
 
 export const poses: Pose[] = [
   {
@@ -27,37 +27,41 @@ export const poses: Pose[] = [
     id: 1,
     name: 'Bird / Plank',
     path: '001',
-    transitions: [2, 31, 46, 74, 76],
+    transitions: [
+      5, 6, 7, 8, 9, 14, 21, 28, 30, 33, 35, 39, 40, 41, 44, 45, 47, 58, 64, 67, 69, 71, 74, 75,
+    ],
   },
   {
     id: 2,
     name: 'Foot to forearms',
     path: '002',
-    transitions: [1, 22, 41, 53, 64, 72, 73],
+    transitions: [46],
   },
   {
     id: 3,
     name: 'Shin to hand balance Gate',
     path: '003',
-    transitions: [1, 7, 14, 27, 58],
+    transitions: [8, 24, 68],
   },
   {
     id: 4,
     name: 'Pashi float balance wide in hands',
     path: '004',
-    transitions: [1, 12, 23, 24, 47, 68, 71],
+    transitions: [17, 22, 57],
   },
   {
     id: 5,
     name: 'Couch vash',
     path: '005',
-    transitions: [12, 41, 53, 68, 69],
+    transitions: [24, 37],
   },
   {
     id: 6,
     name: 'Birth 3 point contact',
     path: '006',
-    transitions: [2, 16, 59],
+    transitions: [
+      1, 5, 7, 8, 9, 14, 21, 28, 30, 33, 35, 39, 40, 41, 44, 45, 47, 58, 64, 67, 69, 71, 74, 75,
+    ],
   },
   {
     id: 7,
