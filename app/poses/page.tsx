@@ -1,9 +1,11 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import CategoryFilter from '../components/CategoryFilter';
 import PoseImage from '../components/PoseImage';
+import { Category, allCategories } from '../components/models/categories';
+import { filterByCategories, poses } from '../components/models/poses';
 import { useWindowSizeContext } from '../context/WindowSizeContext';
-import { poses } from '../utils/poses';
 import { getScale } from '../utils/scale';
 import './Page.css';
 
@@ -19,14 +21,19 @@ const AllPoses = () => {
   const [searchText, setSearchText] = useState('');
   const [debugPressCount, setDebugPressCount] = useState(0);
   const debugEnabled = debugPressCount >= 5;
+  const [categories, setCategories] = useState<Category[]>(allCategories);
+
+  const categoryFilteredPoses = useMemo(() => {
+    return filterByCategories(actualPoses, categories);
+  }, [categories]);
 
   const filteredPoses = useMemo(() => {
     const cleanSearchText = cleanText(searchText);
     if (cleanSearchText) {
-      return actualPoses.filter((pose) => cleanText(pose.name).includes(cleanSearchText));
+      return categoryFilteredPoses.filter((pose) => cleanText(pose.name).includes(cleanSearchText));
     }
-    return actualPoses;
-  }, [searchText]);
+    return categoryFilteredPoses;
+  }, [searchText, categoryFilteredPoses]);
 
   const onChangeSearchText = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
@@ -56,6 +63,7 @@ const AllPoses = () => {
           ⊗
         </span>
       </div>
+      <CategoryFilter categories={categories} setCategories={setCategories} />
       <br />
       <br />
       <div className="PoseContainer">

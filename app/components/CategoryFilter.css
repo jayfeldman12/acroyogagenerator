@@ -1,0 +1,34 @@
+#FilterContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px;
+}
+
+#ToggleBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px;
+}
+
+#Label {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.easy {
+  color: blue;
+}
+
+.medium {
+  color: green;
+}
+
+.hard {
+  color: red;
+}

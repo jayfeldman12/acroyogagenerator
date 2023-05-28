@@ -1,4 +1,5 @@
-import { imagePath } from './url';
+import { imagePath } from '../../utils/url';
+import { Category } from './categories';
 
 export const posePathToUrl = ({ path }: Pose) => {
   return `${imagePath}/image-${path}.jpg`;
@@ -15,7 +16,9 @@ export interface Pose {
   transitions: number[];
 }
 
-export type Category = 'easy' | 'medium' | 'hard';
+export const filterByCategories = (poses: Pose[], categories: Category[]) => {
+  return poses.filter((pose) => categories.includes(pose.category));
+};
 
 export const startingPoses = [1, 6, 8, 9, 17, 18, 19, 24, 26, 32, 33, 39, 56, 57, 64, 72, 74];
 

@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import CategoryFilter from '../components/CategoryFilter';
 import PoseImage from '../components/PoseImage';
+import { Category, allCategories } from '../components/models/categories';
+import { Pose, filterByCategories, poses } from '../components/models/poses';
 import { useWindowSizeContext } from '../context/WindowSizeContext';
-import { Pose, poses } from '../utils/poses';
 import { getScale, getScaledDimensions } from '../utils/scale';
 import { imagePath } from '../utils/url';
 import './PoseGenerator.css';
@@ -12,8 +14,8 @@ const reloadButtonUrl = `${imagePath}/ClickForNewPose.png`;
 
 const actualPoses = poses.slice(1);
 
-const getRandomPose = (): Pose => {
-  return actualPoses[Math.floor(Math.random() * actualPoses.length)];
+const getRandomPose = (poses = actualPoses): Pose => {
+  return poses[Math.floor(Math.random() * poses.length)];
 };
 
 const defaultReloadWidth = 300;
@@ -21,15 +23,19 @@ const defaultReloadHeight = 50;
 
 const PoseGenerator = () => {
   const [activePose, setActivePose] = useState(getRandomPose());
+  const [categories, setCategories] = useState<Category[]>(allCategories);
+  const filteredPoses = useMemo(() => filterByCategories(actualPoses, categories), [categories]);
   const dimensions = useWindowSizeContext();
   const { windowWidth } = dimensions;
 
   const setNewPose = () => {
-    let newPose: Pose;
-    do {
-      newPose = getRandomPose();
-    } while (newPose === activePose);
-    setActivePose(newPose);
+    if (filteredPoses.length) {
+      let newPose: Pose;
+      do {
+        newPose = getRandomPose(filteredPoses);
+      } while (newPose === activePose);
+      setActivePose(newPose);
+    }
   };
 
   const { width: reloadWidth, height: reloadHeight } = getScaledDimensions(
@@ -51,6 +57,7 @@ const PoseGenerator = () => {
         </em>
       </div>
       <br />
+      <CategoryFilter categories={categories} setCategories={setCategories} />
       <img
         src={reloadButtonUrl}
         width={reloadWidth}

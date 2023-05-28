@@ -1,39 +1,69 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import CategoryFilter from '../components/CategoryFilter';
 import PoseImage from '../components/PoseImage';
+import { Category, allCategories } from '../components/models/categories';
+import { Pose, filterByCategories, poses, startingPoses } from '../components/models/poses';
 import { useWindowSizeContext } from '../context/WindowSizeContext';
-import { Pose, poses, startingPoses } from '../utils/poses';
 import { getScale } from '../utils/scale';
 import FlowControls from './FlowControls';
 import './FlowGenerator.css';
 
-const startFlow = () => {
-  return [poses[startingPoses[Math.floor(Math.random() * startingPoses.length)]]];
+const getPoseById = (possiblePoses: Pose[], id: number): Pose => {
+  return possiblePoses.find((pose) => pose.id === id)!;
 };
 
-const getNextPoseInFlow = (pose: Pose): Pose => {
-  return poses[pose.transitions[Math.floor(Math.random() * pose.transitions.length)]];
+const startFlow = () => {
+  return [getPoseById(poses, startingPoses[Math.floor(Math.random() * startingPoses.length)])];
+};
+
+const getNextPoseInFlow = (pose: Pose, filteredPoses: Pose[]): Pose => {
+  return getPoseById(
+    filteredPoses,
+    pose.transitions[Math.floor(Math.random() * pose.transitions.length)]
+  );
 };
 
 const FlowGenerator = () => {
+  const [categories, setCategories] = useState<Category[]>(allCategories);
+  const filteredPoses = useMemo(() => filterByCategories(poses, categories), [categories]);
   const [activeFlow, setActiveFlow] = useState(startFlow());
+  const [error, setError] = useState('');
+
   const dimensions = useWindowSizeContext();
   const finalIndex = activeFlow.length - 1;
 
   const regenerateCurrentPose = () => {
     setActiveFlow((currentFlow) => [
       ...currentFlow.slice(0, finalIndex),
-      getNextPoseInFlow(activeFlow[finalIndex]),
+      getNextPoseInFlow(activeFlow[finalIndex], filteredPoses),
     ]);
   };
 
   const addNewPose = () => {
     let newPose: Pose;
+    let counter = 0;
+    const maxCounter = 20;
     do {
-      newPose = getNextPoseInFlow(activeFlow[finalIndex]);
-    } while (newPose === activeFlow[finalIndex - 1]);
-    setActiveFlow((currentFlow) => [...currentFlow, newPose]);
+      newPose = getNextPoseInFlow(activeFlow[finalIndex], filteredPoses);
+      counter++;
+    } while (counter < maxCounter && (!newPose || newPose === activeFlow[finalIndex - 1]));
+    if (newPose) {
+      setActiveFlow((currentFlow) => [...currentFlow, newPose]);
+      return newPose;
+    } else {
+      return false;
+    }
+  };
+
+  const onPressNext = () => {
+    const newPose = addNewPose();
+    if (newPose) {
+      setError('');
+    } else {
+      setError('No transition possible with current filters');
+    }
   };
 
   return (
@@ -45,6 +75,7 @@ const FlowGenerator = () => {
         </p>
         <em>Start in one pose, click NEXT POSE, and try to get to the next pose</em>
       </div>
+      <CategoryFilter categories={categories} setCategories={setCategories} />
       <br />
       <br />
       <div id="Flow">
@@ -56,9 +87,10 @@ const FlowGenerator = () => {
           );
         })}
       </div>
+      {error ? <p className="error">{error}</p> : null}
       <FlowControls
         regenerate={regenerateCurrentPose}
-        next={addNewPose}
+        next={onPressNext}
         clear={() => setActiveFlow(startFlow())}
       />
     </div>
