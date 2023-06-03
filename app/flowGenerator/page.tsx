@@ -44,23 +44,26 @@ const FlowGenerator = () => {
   const addNewPose = () => {
     let newPose: Pose;
     let counter = 0;
-    const maxCounter = 20;
-    do {
-      newPose = getNextPoseInFlow(activeFlow[finalIndex], filteredPoses);
-      counter++;
-    } while (counter < maxCounter && (!newPose || newPose === activeFlow[finalIndex - 1]));
-    if (newPose) {
-      setActiveFlow((currentFlow) => [...currentFlow, newPose]);
-      return newPose;
-    } else {
-      return false;
-    }
-  };
+    const maxCounter = 30;
+    // Creates a temporary transitions array using the current valid transitions
+    const currentPose = {
+      ...activeFlow[finalIndex],
+      transitions: [...activeFlow[finalIndex].transitions],
+    };
+    currentPose.transitions = currentPose.transitions.filter((transition) =>
+      filteredPoses.find((pose) => pose.id === transition)
+    );
 
-  const onPressNext = () => {
-    const newPose = addNewPose();
+    do {
+      newPose = getNextPoseInFlow(currentPose, filteredPoses);
+      counter++;
+    } while (
+      counter < maxCounter &&
+      (!newPose || (newPose.transitions.length > 1 && newPose === activeFlow[finalIndex - 1]))
+    );
     if (newPose) {
       setError('');
+      setActiveFlow((currentFlow) => [...currentFlow, newPose]);
     } else {
       setError('No transition possible with current filters');
     }
@@ -90,7 +93,7 @@ const FlowGenerator = () => {
       {error ? <p className="error">{error}</p> : null}
       <FlowControls
         regenerate={regenerateCurrentPose}
-        next={onPressNext}
+        next={addNewPose}
         clear={() => setActiveFlow(startFlow())}
       />
     </div>

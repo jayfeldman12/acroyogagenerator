@@ -9,8 +9,6 @@ import { useWindowSizeContext } from '../context/WindowSizeContext';
 import { getScale } from '../utils/scale';
 import './Page.css';
 
-const actualPoses = poses.filter((pose) => pose.path);
-
 // Util that takes text in, lowercases, and takes out all non-alphanumeric characters
 const cleanText = (text: string): string => {
   return text.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -24,7 +22,7 @@ const AllPoses = () => {
   const [categories, setCategories] = useState<Category[]>(allCategories);
 
   const categoryFilteredPoses = useMemo(() => {
-    return filterByCategories(actualPoses, categories);
+    return filterByCategories(poses, categories);
   }, [categories]);
 
   const filteredPoses = useMemo(() => {

@@ -12,10 +12,12 @@ import './PoseGenerator.css';
 
 const reloadButtonUrl = `${imagePath}/ClickForNewPose.png`;
 
-const actualPoses = poses.slice(1);
+const getPoseById = (possiblePoses: Pose[], id: number): Pose => {
+  return possiblePoses.find((pose) => pose.id === id)!;
+};
 
-const getRandomPose = (poses = actualPoses): Pose => {
-  return poses[Math.floor(Math.random() * poses.length)];
+const getRandomPose = (potentialPoses = poses): Pose => {
+  return getPoseById(potentialPoses, Math.floor(Math.random() * potentialPoses.length));
 };
 
 const defaultReloadWidth = 300;
@@ -24,7 +26,7 @@ const defaultReloadHeight = 50;
 const PoseGenerator = () => {
   const [activePose, setActivePose] = useState(getRandomPose());
   const [categories, setCategories] = useState<Category[]>(allCategories);
-  const filteredPoses = useMemo(() => filterByCategories(actualPoses, categories), [categories]);
+  const filteredPoses = useMemo(() => filterByCategories(poses, categories), [categories]);
   const dimensions = useWindowSizeContext();
   const { windowWidth } = dimensions;
 
