@@ -45,7 +45,7 @@ const PoseGenerator = () => {
   return (
     <div className="PoseGenerator">
       <div className="TextContainer">
-        <h1>ACRO POSE GENERATOR</h1>
+        <h1>ACRO YOGA POSE GENERATOR</h1>
         <p>
           <strong>"FLOOR IS LAVA" ACRO GAME</strong>
         </p>

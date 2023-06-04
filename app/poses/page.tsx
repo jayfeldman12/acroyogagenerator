@@ -40,7 +40,7 @@ const AllPoses = () => {
   return (
     <div className="AllPoses">
       <div className="TextContainer">
-        <h1 onClick={() => setDebugPressCount((count) => count + 1)}>ALL POSES</h1>
+        <h1 onClick={() => setDebugPressCount((count) => count + 1)}>ALL ACRO YOGA POSES</h1>
       </div>
       {debugEnabled ? <p id="Debug">ID mode enabled</p> : null}
       <div id="InputContainer">
