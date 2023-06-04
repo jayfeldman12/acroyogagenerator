@@ -80,7 +80,7 @@ const FlowGenerator = () => {
   return (
     <div className="FlowGenerator">
       <div className="TextContainer">
-        <h1>ACRO FLOW GENERATOR</h1>
+        <h1>ACRO YOGA FLOW GENERATOR</h1>
         <p>
           <strong>"MATCH THE FLOW" ACRO GAME</strong>
         </p>
