@@ -20,7 +20,7 @@ export const filterByCategories = (poses: Pose[], categories: Category[]) => {
   return poses.filter((pose) => categories.includes(pose.category));
 };
 
-export const startingPoses = [1, 8, 9, 17, 18, 19, 24, 26, 32, 33, 57, 64, 74];
+export const startingPoses = [1, 8, 9, 17, 19, 24, 26, 32, 33, 57, 64, 74];
 
 export const poses: Pose[] = [
   {
@@ -63,7 +63,6 @@ export const poses: Pose[] = [
     id: 8,
     name: 'Easy throne',
     path: '008',
-    // transitions: [1, 33, 55],
     transitions: [1, 3, 7, 15, 16, 19, 21, 24, 31, 35, 37, 38, 42, 52, 54, 58, 59, 63, 70, 74],
   },
   {
@@ -71,7 +70,6 @@ export const poses: Pose[] = [
     id: 9,
     name: 'Shoulderstand candlestick',
     path: '009',
-    // transitions: [1, 5, 22, 24, 35, 48],
     transitions: [1, 7, 10, 14, 30, 44, 51, 64, 74],
   },
   {
@@ -79,7 +77,6 @@ export const poses: Pose[] = [
     id: 10,
     name: 'Bicep stand hands reverse',
     path: '010',
-    // transitions: [3, 11, 16, 27, 33, 49],
     transitions: [27, 33, 40, 43, 57, 64],
   },
   {
@@ -87,7 +84,6 @@ export const poses: Pose[] = [
     id: 11,
     name: 'Hangle dangle',
     path: '011',
-    // transitions: [8, 11, 18, 24, 37, 41, 47, 49, 58],
     transitions: [4, 17, 18, 37, 47, 49, 58],
   },
   {
@@ -102,7 +98,6 @@ export const poses: Pose[] = [
     id: 13,
     name: 'Dragonfly / Dead bug float',
     path: '013',
-    // transitions: [11, 15, 23, 31, 42, 58],
     transitions: [41, 47, 57],
   },
   {
@@ -110,7 +105,6 @@ export const poses: Pose[] = [
     id: 14,
     name: 'Shoulderstand free',
     path: '014',
-    // transitions: [2, 8, 21, 37, 45, 70],
     transitions: [1, 7, 9, 23, 26, 28, 34, 35, 47, 49, 51, 55, 64, 71, 74],
   },
   {
@@ -118,7 +112,6 @@ export const poses: Pose[] = [
     id: 15,
     name: 'Straddle Throne Warrior',
     path: '015',
-    // transitions: [9, 12, 26, 46, 55, 66],
     transitions: [3, 8, 16, 21, 24, 31, 37, 52, 54],
   },
   {
@@ -126,7 +119,6 @@ export const poses: Pose[] = [
     id: 16,
     name: 'Foot to hand low (F2H)',
     path: '016',
-    // transitions: [3, 7, 18, 32, 47, 62],
     transitions: [8, 12, 19, 21, 24, 28, 42, 54, 65, 73, 76],
   },
   {
@@ -134,7 +126,6 @@ export const poses: Pose[] = [
     id: 17,
     name: 'Straddle bat',
     path: '017',
-    // transitions: [5, 15, 20, 39, 53, 71],
     transitions: [11, 18, 20, 28, 29, 37, 41, 45, 46, 47, 49, 50, 58, 60],
   },
   {
@@ -142,7 +133,6 @@ export const poses: Pose[] = [
     id: 18,
     name: 'Tick tock',
     path: '018',
-    // transitions: [14, 19, 28, 50, 57],
     transitions: [11, 17, 20, 33, 37, 47, 48, 49, 58, 64, 66, 74],
   },
   {
@@ -150,7 +140,6 @@ export const poses: Pose[] = [
     id: 19,
     name: 'Whale',
     path: '019',
-    // transitions: [6, 9, 17, 29, 44, 75],
     transitions: [8, 16, 24, 38, 58, 59],
   },
   {
@@ -158,7 +147,6 @@ export const poses: Pose[] = [
     id: 20,
     name: 'Pashi float',
     path: '020',
-    // transitions: [3, 12, 38, 51, 60],
     transitions: [17, 27, 33, 36, 43, 48, 51, 57, 60],
   },
   {
@@ -166,7 +154,6 @@ export const poses: Pose[] = [
     id: 21,
     name: 'Shin in hands float',
     path: '021',
-    // transitions: [4, 10, 18, 30, 48, 65],
     transitions: [2, 8, 16, 19, 24, 26, 32, 52, 54, 59, 70, 76],
   },
   {
@@ -174,7 +161,6 @@ export const poses: Pose[] = [
     id: 23,
     name: 'Bicep stand - feet',
     path: '023',
-    // transitions: [7, 14, 17, 19, 30, 35, 49],
     transitions: [30, 35, 36, 51, 64, 74],
   },
   {
@@ -182,7 +168,6 @@ export const poses: Pose[] = [
     id: 24,
     name: 'Straddle throne',
     path: '024',
-    // transitions: [5, 11, 20, 34, 43, 69],
     transitions: [1, 3, 7, 15, 16, 19, 21, 35, 37, 38, 42, 52, 58, 59, 63, 70, 74],
   },
   {
@@ -190,7 +175,6 @@ export const poses: Pose[] = [
     id: 25,
     name: 'Bird in hand toe hold',
     path: '025',
-    // transitions: [6, 15, 23, 36, 54, 64],
     transitions: [43, 57, 68],
   },
   {
@@ -198,7 +182,6 @@ export const poses: Pose[] = [
     id: 26,
     name: 'Foot to shin',
     path: '026',
-    // transitions: [8, 16, 21, 37, 45, 70],
     transitions: [7, 8, 14, 16, 21, 24, 30, 32, 34, 35, 41, 44, 51, 55, 59, 76],
   },
   {
@@ -206,7 +189,6 @@ export const poses: Pose[] = [
     id: 27,
     name: 'Shoulderstand free reverse',
     path: '027',
-    // transitions: [2, 9, 10, 20, 24, 35, 42],
     transitions: [10, 29, 33, 34, 36, 48, 55, 61],
   },
   {
@@ -214,7 +196,6 @@ export const poses: Pose[] = [
     id: 28,
     name: 'Reverse star',
     path: '028',
-    // transitions: [3, 14, 29, 38, 57, 72],
     transitions: [1, 7, 17, 30, 44, 45, 74],
   },
   {
@@ -222,7 +203,6 @@ export const poses: Pose[] = [
     id: 29,
     name: 'Hand to hand (h2h)',
     path: '029',
-    // transitions: [10, 18, 26, 31, 50, 63],
     transitions: [17, 27, 33, 36, 40, 48, 51, 57, 61],
   },
   {
@@ -230,7 +210,6 @@ export const poses: Pose[] = [
     id: 30,
     name: 'Shoulderstand supported',
     path: '030',
-    // transitions: [7, 11, 27, 39, 47, 75],
     transitions: [1, 7, 9, 14, 23, 26, 28, 34, 35, 45, 47, 49, 51, 55, 64, 71, 74],
   },
   {
@@ -238,7 +217,6 @@ export const poses: Pose[] = [
     id: 31,
     name: 'Straddle throne mermaid',
     path: '031',
-    // transitions: [1, 12, 19, 33, 55, 76],
     transitions: [15, 47, 49, 52, 59],
   },
   {
@@ -246,7 +224,6 @@ export const poses: Pose[] = [
     id: 32,
     name: 'Shin to foot',
     path: '032',
-    // transitions: [8, 13, 22, 40, 56, 71],
     transitions: [7, 14, 16, 21, 26, 35, 41, 55.59, 63, 65, 71],
   },
   {
@@ -254,7 +231,6 @@ export const poses: Pose[] = [
     id: 33,
     name: 'Star',
     path: '033',
-    // transitions: [4, 15, 28, 44, 58, 70],
     transitions: [1, 2, 10, 12, 18, 20, 27, 29, 36, 40, 46, 48, 51, 57, 58, 60, 61, 64, 66, 74],
   },
   {
@@ -262,7 +238,6 @@ export const poses: Pose[] = [
     id: 34,
     name: 'Bicep stand - hands',
     path: '034',
-    // transitions: [5, 16, 21, 36, 68],
     transitions: [1, 14, 26, 30, 35, 44, 47, 55],
   },
   {
@@ -270,7 +245,6 @@ export const poses: Pose[] = [
     id: 35,
     name: 'Camel low flying',
     path: '035',
-    // transitions: [2, 10, 23, 39, 49, 67],
     transitions: [1, 7, 8, 24, 26, 30, 32, 34, 41, 44, 47, 51, 55, 59, 63, 64, 65, 71, 74],
   },
   {
@@ -278,7 +252,6 @@ export const poses: Pose[] = [
     id: 36,
     name: 'Forearm star balance',
     path: '036',
-    // transitions: [6, 17, 24, 42, 51, 66],
     transitions: [7, 20, 27, 29, 33, 40, 55, 57, 61],
   },
   {
@@ -286,7 +259,6 @@ export const poses: Pose[] = [
     id: 37,
     name: "Couch vishnu's",
     path: '037',
-    // transitions: [3, 9, 20, 38, 59, 74],
     transitions: [8, 11, 17, 18, 20, 24, 41, 47, 49, 58, 64],
   },
   {
@@ -294,7 +266,6 @@ export const poses: Pose[] = [
     id: 38,
     name: 'Side backfly dancer / Stag',
     path: '038',
-    // transitions: [1, 11, 25, 46, 54, 60],
     transitions: [8, 19, 24, 29, 43, 57],
   },
   {
@@ -302,7 +273,6 @@ export const poses: Pose[] = [
     id: 40,
     name: 'Shoulderstand reverse supported',
     path: '040',
-    // transitions: [2, 12, 27, 34, 57, 69],
     transitions: [10, 29, 33, 40, 48],
   },
   {
@@ -310,7 +280,6 @@ export const poses: Pose[] = [
     id: 41,
     name: 'Bird in hand presses & rotation',
     path: '041',
-    // transitions: [8, 13, 22, 44, 56, 75],
     transitions: [1, 13, 17, 26, 35, 37, 43, 44, 46, 47, 49, 57, 64, 74, 75],
   },
   {
@@ -318,7 +287,6 @@ export const poses: Pose[] = [
     id: 42,
     name: 'Foot to hand mid (F2H)',
     path: '042',
-    // transitions: [3, 16, 28, 41, 48, 73],
     transitions: [1, 3, 33, 46, 48, 68, 74, 76],
   },
   {
@@ -326,7 +294,6 @@ export const poses: Pose[] = [
     id: 43,
     name: 'Backfly boat',
     path: '043',
-    // transitions: [17, 30, 45, 50, 61],
     transitions: [13, 25, 38, 41, 57, 58],
   },
   {
@@ -334,7 +301,6 @@ export const poses: Pose[] = [
     id: 44,
     name: 'Shoulderstand supported scorpion',
     path: '044',
-    // transitions: [7, 14, 23, 37, 51, 62],
     transitions: [1, 7, 28, 34, 35, 41, 45, 49, 55, 64, 71, 74],
   },
   {
@@ -342,7 +308,6 @@ export const poses: Pose[] = [
     id: 45,
     name: 'Reverse star (free)',
     path: '045',
-    // transitions: [8, 16, 24, 38, 57, 71],
     transitions: [1, 7, 17, 30, 44, 74],
   },
   {
@@ -350,7 +315,6 @@ export const poses: Pose[] = [
     id: 46,
     name: 'Reverse bird',
     path: '046',
-    // transitions: [6, 12, 26, 39, 58, 66],
     transitions: [1, 2, 12, 17, 41, 33, 42, 47, 58, 60, 61, 74],
   },
   {
@@ -358,7 +322,6 @@ export const poses: Pose[] = [
     id: 47,
     name: 'Koala',
     path: '047',
-    // transitions: [4, 15, 27, 40, 52, 70],
     transitions: [1, 11, 14, 17, 18, 30, 34, 35, 37, 41, 49, 55, 58, 64, 74, 75],
   },
   {
@@ -366,7 +329,6 @@ export const poses: Pose[] = [
     id: 48,
     name: 'Star free',
     path: '048',
-    // transitions: [9, 19, 29, 46, 60, 76],
     transitions: [1, 2, 10, 12, 18, 20, 27, 29, 36, 40, 48, 51, 57, 58, 60, 61, 64, 66, 71, 74],
   },
   {
@@ -374,7 +336,6 @@ export const poses: Pose[] = [
     id: 49,
     name: 'Straddle mono pigeon',
     path: '049',
-    // transitions: [5, 18, 25, 42, 55, 63],
     transitions: [1, 11, 17, 18, 30, 37, 41, 44, 47, 55, 58, 60, 64, 71, 74, 75],
   },
   {
@@ -382,7 +343,6 @@ export const poses: Pose[] = [
     id: 50,
     name: 'Prasarita twist / Folded leaf to straddlebat',
     path: '050',
-    // transitions: [7, 13, 21, 43, 54, 74],
     transitions: [17, 64],
   },
   {
@@ -390,7 +350,6 @@ export const poses: Pose[] = [
     id: 51,
     name: 'Shoulderstand in hands (lotus)',
     path: '051',
-    // transitions: [6, 14, 22, 36, 59, 72],
     transitions: [7, 9, 14, 20, 23, 26, 29, 30, 33, 35, 48, 57],
   },
   {
@@ -398,7 +357,6 @@ export const poses: Pose[] = [
     id: 52,
     name: 'Thinker / Mono throne',
     path: '052',
-    // transitions: [8, 17, 28, 47, 61, 75],
     transitions: [1, 8, 15, 21, 24, 31, 54, 57, 58, 59, 63, 64, 68, 74],
   },
   {
@@ -406,7 +364,6 @@ export const poses: Pose[] = [
     id: 54,
     name: 'Double splits',
     path: '054',
-    // transitions: [4, 11, 26, 42, 52, 69],
     transitions: [1, 8, 15, 16, 21, 52, 59, 70, 71, 74],
   },
   {
@@ -414,7 +371,6 @@ export const poses: Pose[] = [
     id: 55,
     name: 'Reverse hand to hand (RH2H)',
     path: '055',
-    // transitions: [5, 12, 23, 41, 56, 68],
     transitions: [1, 7, 9, 14, 23, 26, 28, 30, 34, 35, 36, 41, 44, 47, 64, 71, 74, 76],
   },
   {
@@ -422,7 +378,6 @@ export const poses: Pose[] = [
     id: 57,
     name: 'Backfly',
     path: '057',
-    // transitions: [7, 19, 30, 44, 60, 73],
     transitions: [4, 10, 13, 25, 29, 33, 36, 38, 41, 43, 48, 51, 58, 68],
   },
   {
@@ -430,7 +385,6 @@ export const poses: Pose[] = [
     id: 58,
     name: 'Side star',
     path: '058',
-    // transitions: [6, 18, 25, 43, 51, 62],
     transitions: [1, 8, 11, 17, 18, 19, 24, 33, 37, 43, 46, 47, 48, 49, 52, 57, 60, 61, 64, 66, 74],
   },
   {
@@ -438,7 +392,6 @@ export const poses: Pose[] = [
     id: 59,
     name: 'Shin to hands',
     path: '059',
-    // transitions: [4, 14, 29, 36, 55, 71]
     transitions: [1, 8, 16, 19, 21, 24, 26, 32, 35, 52, 63, 65, 70, 74, 76],
   },
   {
@@ -446,7 +399,6 @@ export const poses: Pose[] = [
     id: 60,
     name: 'Pashi float in feet',
     path: '060',
-    // transitions: [13, 37, 54, 65],
     transitions: [17, 20, 33, 46, 48, 58, 61],
   },
   {
@@ -454,7 +406,6 @@ export const poses: Pose[] = [
     id: 61,
     name: 'Star scorpion',
     path: '061',
-    // transitions: [7, 15, 26, 42, 50],
     transitions: [27, 29, 33, 36, 46, 48, 58, 60],
   },
   {
@@ -462,7 +413,6 @@ export const poses: Pose[] = [
     id: 63,
     name: 'Camel in hands',
     path: '063',
-    // transitions: [3, 12, 20, 34, 47, 74],
     transitions: [8, 24, 32, 35, 52, 59, 65],
   },
   {
@@ -470,7 +420,6 @@ export const poses: Pose[] = [
     id: 64,
     name: 'Folded leaf',
     path: '064',
-    // transitions: [4, 11, 23, 35, 56, 69],
     transitions: [
       1, 4, 7, 9, 10, 14, 18, 23, 30, 33, 35, 37, 41, 44, 47, 48, 49, 50, 51, 55, 58, 71, 74, 75,
     ],
@@ -487,7 +436,6 @@ export const poses: Pose[] = [
     id: 66,
     name: 'Star free tuck (staggered)',
     path: '066',
-    // transitions: [6, 16, 24, 41, 68],
     transitions: [18, 33, 48, 58],
   },
   {
@@ -495,7 +443,6 @@ export const poses: Pose[] = [
     id: 68,
     name: 'Reverse throne',
     path: '068',
-    // transitions: [10, 18, 30, 44, 51, 67],
     transitions: [2, 3, 25, 33, 42, 48, 52, 57],
   },
   {
@@ -503,7 +450,6 @@ export const poses: Pose[] = [
     id: 70,
     name: 'Stair stepper',
     path: '070',
-    // transitions: [13, 22, 32, 45, 59, 73],
     transitions: [8, 16, 21, 54, 59, 71, 76],
   },
   {
@@ -511,7 +457,6 @@ export const poses: Pose[] = [
     id: 71,
     name: 'V-Up / F-Me',
     path: '071',
-    // transitions: [14, 23, 33, 43, 55, 78],
     transitions: [1, 7, 14, 30, 32, 34, 44, 47, 49, 54, 55, 64, 70, 74, 76],
   },
   {
@@ -519,7 +464,6 @@ export const poses: Pose[] = [
     id: 74,
     name: 'Bird (free)',
     path: '074',
-    // transitions: [17, 26, 36, 40, 54, 80],
     transitions: [1, 7, 8, 9, 14, 18, 28, 30, 33, 35, 37, 41, 44, 45, 46, 47, 58, 64, 71, 75],
   },
   {
@@ -527,7 +471,6 @@ export const poses: Pose[] = [
     id: 75,
     name: 'Bow',
     path: '075',
-    // transitions: [18, 27, 37, 39, 61, 81],
     transitions: [1, 14, 30, 34, 35, 41, 44, 46, 47, 55, 58, 64, 65, 71, 74],
   },
   // Probably a lot back,
@@ -536,7 +479,6 @@ export const poses: Pose[] = [
     id: 76,
     name: 'Foot to foot (F2F)',
     path: '076',
-    // transitions: [19, 28, 38, 45, 56, 82],
     transitions: [7, 8, 14, 15, 16, 21, 24, 30, 34, 41, 42, 44, 52, 55, 59, 70, 71],
   },
 ];

@@ -42,9 +42,6 @@ const FlowGenerator = () => {
   };
 
   const addNewPose = () => {
-    let newPose: Pose;
-    let counter = 0;
-    const maxCounter = 30;
     // Creates a temporary transitions array using the current valid transitions
     const currentPose = {
       ...activeFlow[finalIndex],
@@ -54,13 +51,24 @@ const FlowGenerator = () => {
       filteredPoses.find((pose) => pose.id === transition)
     );
 
-    do {
-      newPose = getNextPoseInFlow(currentPose, filteredPoses);
-      counter++;
-    } while (
-      counter < maxCounter &&
-      (!newPose || (newPose.transitions.length > 1 && newPose === activeFlow[finalIndex - 1]))
-    );
+    // If there are other valid transitions, filters out poses you just come from
+    if (activeFlow.length > 1 && currentPose.transitions.length > 1) {
+      const previousPoseIndex = currentPose.transitions.indexOf(activeFlow[finalIndex - 1].id);
+      if (previousPoseIndex > -1) {
+        currentPose.transitions.splice(previousPoseIndex, 1);
+      }
+    }
+
+    // Make transitions you haven't gone to 4 times as likely
+    currentPose.transitions = currentPose.transitions.reduce<number[]>((acc, transitionId) => {
+      if (activeFlow.some((previousPose) => previousPose.id === transitionId)) {
+        return [...acc, transitionId];
+      }
+      return [...acc, transitionId, transitionId, transitionId, transitionId];
+    }, []);
+
+    const newPose = getNextPoseInFlow(currentPose, filteredPoses);
+
     if (newPose) {
       setError('');
       setActiveFlow((currentFlow) => [...currentFlow, newPose]);
