@@ -12,12 +12,8 @@ import './PoseGenerator.css';
 
 const reloadButtonUrl = `${imagePath}/ClickForNewPose.png`;
 
-const getPoseById = (possiblePoses: Pose[], id: number): Pose => {
-  return possiblePoses.find((pose) => pose.id === id)!;
-};
-
 const getRandomPose = (potentialPoses = poses): Pose => {
-  return getPoseById(potentialPoses, Math.floor(Math.random() * potentialPoses.length));
+  return potentialPoses[Math.floor(Math.random() * potentialPoses.length)];
 };
 
 const defaultReloadWidth = 300;
