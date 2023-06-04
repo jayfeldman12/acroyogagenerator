@@ -66,7 +66,7 @@ const AllPoses = () => {
       <br />
       <div className="PoseContainer">
         {filteredPoses.map((pose) => (
-          <span>
+          <span key={pose.id}>
             <PoseImage key={pose.id} pose={pose} scale={getScale(0.4, dimensions)} />
             {debugEnabled ? <p>{pose.id}</p> : null}
           </span>

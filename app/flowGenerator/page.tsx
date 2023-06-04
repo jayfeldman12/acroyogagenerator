@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import CategoryFilter from '../components/CategoryFilter';
 import PoseImage from '../components/PoseImage';
 import { Category, allCategories } from '../components/models/categories';
@@ -25,10 +25,14 @@ const getNextPoseInFlow = (pose: Pose, filteredPoses: Pose[]): Pose => {
   );
 };
 
+// Saves state when navigating back and forth
+let savedFlow: Pose[];
+let savedCategories: Category[] = allCategories;
+
 const FlowGenerator = () => {
-  const [categories, setCategories] = useState<Category[]>(allCategories);
+  const [categories, setCategories] = useState<Category[]>(savedCategories ?? allCategories);
   const filteredPoses = useMemo(() => filterByCategories(poses, categories), [categories]);
-  const [activeFlow, setActiveFlow] = useState(startFlow());
+  const [activeFlow, setActiveFlow] = useState(savedFlow ?? startFlow());
   const [error, setError] = useState('');
 
   const dimensions = useWindowSizeContext();
@@ -76,6 +80,13 @@ const FlowGenerator = () => {
       setError('No transition possible with current filters');
     }
   };
+
+  useEffect(() => {
+    return () => {
+      savedFlow = activeFlow;
+      savedCategories = categories;
+    };
+  }, [activeFlow, categories]);
 
   return (
     <div className="FlowGenerator">
