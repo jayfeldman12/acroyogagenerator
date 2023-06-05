@@ -3,16 +3,13 @@
 import { useMemo, useState } from 'react';
 import CategoryFilter from '../components/CategoryFilter';
 import PoseImage from '../components/PoseImage';
+import SearchBar from '../components/SearchBar/SearchBar';
 import { Category, allCategories } from '../components/models/categories';
 import { filterByCategories, poses } from '../components/models/poses';
 import { useWindowSizeContext } from '../context/WindowSizeContext';
+import { cleanText } from '../utils/cleanText';
 import { getScale } from '../utils/scale';
 import './Page.css';
-
-// Util that takes text in, lowercases, and takes out all non-alphanumeric characters
-const cleanText = (text: string): string => {
-  return text.toLowerCase().replace(/[^a-z0-9]/g, '');
-};
 
 const AllPoses = () => {
   const dimensions = useWindowSizeContext();
@@ -33,34 +30,13 @@ const AllPoses = () => {
     return categoryFilteredPoses;
   }, [searchText, categoryFilteredPoses]);
 
-  const onChangeSearchText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(event.target.value);
-  };
-
   return (
     <div className="AllPoses">
       <div className="TextContainer">
         <h1 onClick={() => setDebugPressCount((count) => count + 1)}>ALL ACRO YOGA POSES</h1>
       </div>
       {debugEnabled ? <p id="Debug">ID mode enabled</p> : null}
-      <div id="InputContainer">
-        <input
-          id="SearchInput"
-          type="text"
-          placeholder="Search pose"
-          onChange={onChangeSearchText}
-          value={searchText}
-        />
-
-        <span
-          id="Cancel"
-          onClick={() => setSearchText('')}
-          role="button"
-          aria-label="Reset search text"
-        >
-          ⊗
-        </span>
-      </div>
+      <SearchBar onChangeSearchText={setSearchText} searchText={searchText} />
       <CategoryFilter categories={categories} setCategories={setCategories} />
       <br />
       <br />

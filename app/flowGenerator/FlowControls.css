@@ -1,14 +1,4 @@
-/* Create modern button styles for this class */
-.FlowControl {
-  background-color: #ebf5ff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  color: #333;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.4;
-  padding: 6px 12px;
-  margin: 5px;
+.DeleteButton {
+  background-color: darkred;
+  color: white;
 }

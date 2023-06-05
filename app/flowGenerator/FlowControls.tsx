@@ -2,12 +2,20 @@ import { useRef } from 'react';
 import './FlowControls.css';
 
 interface FlowControlProps {
-  regenerate: () => void;
-  next: () => void;
   clear: () => void;
+  deletePose: () => void;
+  next: () => void;
+  regenerate: () => void;
+  pick: () => void;
 }
 
-const FlowControls: React.FC<FlowControlProps> = ({ clear, regenerate, next }) => {
+const FlowControls: React.FC<FlowControlProps> = ({
+  clear,
+  deletePose,
+  regenerate,
+  next,
+  pick,
+}) => {
   const clearRef = useRef<HTMLButtonElement>(null);
 
   const onNextPosePress = () => {
@@ -21,16 +29,23 @@ const FlowControls: React.FC<FlowControlProps> = ({ clear, regenerate, next }) =
 
   return (
     <div>
-      <button className="FlowControl" id="Regenerate" onClick={regenerate}>
+      <button className="Button" id="Regenerate" onClick={regenerate}>
         Change Last Pose
       </button>
-      <button className="FlowControl" id="Next" onClick={onNextPosePress}>
-        Get Next Pose
+      <button className="Button" id="Next" onClick={onNextPosePress}>
+        Generate Next Pose
       </button>
+      <button className="Button" id="Pick" onClick={pick}>
+        Pick Next Pose
+      </button>
+      <br />
       <br />
       <br />
       <div>
-        <button className="FlowControl" id="Next" onClick={clear} ref={clearRef}>
+        <button className="Button DeleteButton" id="Delete" onClick={deletePose}>
+          Delete Current Pose
+        </button>
+        <button className="Button DeleteButton" id="Clear" onClick={clear} ref={clearRef}>
           Clear all
         </button>
       </div>

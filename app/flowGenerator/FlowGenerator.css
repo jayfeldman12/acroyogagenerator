@@ -33,3 +33,12 @@ p {
 .error {
   color: red;
 }
+
+.Sheet {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  padding-top: 0px;
+  overflow: auto;
+}

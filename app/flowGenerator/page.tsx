@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import Sheet from 'react-modal-sheet';
 import CategoryFilter from '../components/CategoryFilter';
+import PickPose from '../components/PickPose/PickPose';
 import PoseImage from '../components/PoseImage';
 import { Category, allCategories } from '../components/models/categories';
 import { Pose, filterByCategories, poses, startingPoses } from '../components/models/poses';
@@ -33,7 +35,9 @@ const FlowGenerator = () => {
   const [categories, setCategories] = useState<Category[]>(savedCategories ?? allCategories);
   const filteredPoses = useMemo(() => filterByCategories(poses, categories), [categories]);
   const [activeFlow, setActiveFlow] = useState(savedFlow ?? startFlow());
+  const bottomPageRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState('');
+  const [posePickerVisible, setPosePickerVisible] = useState(false);
 
   const dimensions = useWindowSizeContext();
   const finalIndex = activeFlow.length - 1;
@@ -62,7 +66,6 @@ const FlowGenerator = () => {
         currentPose.transitions.splice(previousPoseIndex, 1);
       }
     }
-
     // Make transitions you haven't gone to 4 times as likely
     currentPose.transitions = currentPose.transitions.reduce<number[]>((acc, transitionId) => {
       if (activeFlow.some((previousPose) => previousPose.id === transitionId)) {
@@ -79,6 +82,26 @@ const FlowGenerator = () => {
     } else {
       setError('No transition possible with current filters');
     }
+  };
+
+  const deleteCurrentPose = () => {
+    if (activeFlow.length > 1) {
+      setActiveFlow((currentFlow) => [...currentFlow.slice(0, finalIndex)]);
+    } else {
+      setActiveFlow(startFlow());
+    }
+  };
+
+  const pickNewPose = () => {
+    setPosePickerVisible(true);
+  };
+
+  const onSelectPose = (newPose: Pose) => {
+    setPosePickerVisible(false);
+    setActiveFlow((currentFlow) => [...currentFlow, newPose]);
+    window.requestAnimationFrame(() => {
+      bottomPageRef.current?.scrollIntoView({ behavior: 'smooth' });
+    });
   };
 
   useEffect(() => {
@@ -111,10 +134,33 @@ const FlowGenerator = () => {
       </div>
       {error ? <p className="error">{error}</p> : null}
       <FlowControls
-        regenerate={regenerateCurrentPose}
-        next={addNewPose}
         clear={() => setActiveFlow(startFlow())}
+        deletePose={deleteCurrentPose}
+        next={addNewPose}
+        pick={pickNewPose}
+        regenerate={regenerateCurrentPose}
       />
+      <Sheet
+        isOpen={posePickerVisible}
+        onClose={() => setPosePickerVisible(false)}
+        detent="content-height"
+        springConfig={{ stiffness: 150, damping: 20, mass: 1 }}
+      >
+        <Sheet.Container>
+          <Sheet.Content>
+            <Sheet.Header />
+            <div className="Sheet">
+              <PickPose
+                onDismiss={() => setPosePickerVisible(false)}
+                onPressPose={onSelectPose}
+                possiblePoses={filteredPoses}
+                recommendedPoseIds={activeFlow[finalIndex].transitions}
+              />
+            </div>
+          </Sheet.Content>
+        </Sheet.Container>
+      </Sheet>
+      <div ref={bottomPageRef} />
     </div>
   );
 };
