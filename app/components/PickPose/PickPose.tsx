@@ -86,7 +86,7 @@ const PickPose: React.FC<PickPoseProps> = ({
           </div>
           <div className="PoseContainer">
             {filteredOtherPoses.map((pose) => (
-              <span key={pose.id}>
+              <span key={pose.id} onClick={() => onPressPose(pose)}>
                 <PoseImage key={pose.id} pose={pose} scale={getScale(0.4, dimensions)} />
               </span>
             ))}

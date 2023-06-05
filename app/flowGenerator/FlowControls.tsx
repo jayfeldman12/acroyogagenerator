@@ -30,7 +30,7 @@ const FlowControls: React.FC<FlowControlProps> = ({
   return (
     <div>
       <button className="Button" id="Regenerate" onClick={regenerate}>
-        Change Last Pose
+        Regenerate Last Pose
       </button>
       <button className="Button" id="Next" onClick={onNextPosePress}>
         Generate Next Pose

@@ -50,6 +50,10 @@ const FlowGenerator = () => {
   };
 
   const addNewPose = () => {
+    if (!activeFlow.length) {
+      setActiveFlow(startFlow());
+      return;
+    }
     // Creates a temporary transitions array using the current valid transitions
     const currentPose = {
       ...activeFlow[finalIndex],
@@ -85,11 +89,7 @@ const FlowGenerator = () => {
   };
 
   const deleteCurrentPose = () => {
-    if (activeFlow.length > 1) {
-      setActiveFlow((currentFlow) => [...currentFlow.slice(0, finalIndex)]);
-    } else {
-      setActiveFlow(startFlow());
-    }
+    setActiveFlow((currentFlow) => [...currentFlow.slice(0, finalIndex)]);
   };
 
   const pickNewPose = () => {
@@ -124,17 +124,28 @@ const FlowGenerator = () => {
       <br />
       <br />
       <div id="Flow">
-        {activeFlow.map((pose, index) => {
-          return (
-            <div id="Pose" key={`id${pose.id}index${index}`}>
-              <PoseImage pose={pose} scale={getScale(0.5, dimensions)} />
-            </div>
-          );
-        })}
+        {activeFlow.length ? (
+          activeFlow.map((pose, index) => {
+            console.log('have a pose?', pose);
+            return (
+              <div id="Pose" key={`id${pose.id}index${index}`}>
+                <PoseImage pose={pose} scale={getScale(0.5, dimensions)} />
+              </div>
+            );
+          })
+        ) : (
+          <div>
+            <p className="EmptyFlow">
+              Start your flow by "Generate Next Pose" or "Pick Next Pose" below!
+            </p>
+            <br />
+            <br />
+          </div>
+        )}
       </div>
       {error ? <p className="error">{error}</p> : null}
       <FlowControls
-        clear={() => setActiveFlow(startFlow())}
+        clear={() => setActiveFlow([])}
         deletePose={deleteCurrentPose}
         next={addNewPose}
         pick={pickNewPose}
@@ -154,7 +165,9 @@ const FlowGenerator = () => {
                 onDismiss={() => setPosePickerVisible(false)}
                 onPressPose={onSelectPose}
                 possiblePoses={filteredPoses}
-                recommendedPoseIds={activeFlow[finalIndex].transitions}
+                recommendedPoseIds={
+                  activeFlow.length ? activeFlow[finalIndex].transitions : startingPoses
+                }
               />
             </div>
           </Sheet.Content>
