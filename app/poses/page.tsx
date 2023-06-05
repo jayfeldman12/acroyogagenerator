@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import CategoryFilter from '../components/CategoryFilter';
 import PoseImage from '../components/PoseImage';
 import SearchBar from '../components/SearchBar/SearchBar';
@@ -11,12 +11,15 @@ import { cleanText } from '../utils/cleanText';
 import { getScale } from '../utils/scale';
 import './Page.css';
 
+let initialSearchText = '';
+let initialCategories = allCategories;
+
 const AllPoses = () => {
   const dimensions = useWindowSizeContext();
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState(initialSearchText);
   const [debugPressCount, setDebugPressCount] = useState(0);
   const debugEnabled = debugPressCount >= 5;
-  const [categories, setCategories] = useState<Category[]>(allCategories);
+  const [categories, setCategories] = useState<Category[]>(initialCategories);
 
   const categoryFilteredPoses = useMemo(() => {
     return filterByCategories(poses, categories);
@@ -30,6 +33,13 @@ const AllPoses = () => {
     return categoryFilteredPoses;
   }, [searchText, categoryFilteredPoses]);
 
+  useEffect(() => {
+    return () => {
+      initialSearchText = searchText;
+      initialCategories = categories;
+    };
+  }, [categories, searchText]);
+
   return (
     <div className="AllPoses">
       <div className="TextContainer">
@@ -41,12 +51,16 @@ const AllPoses = () => {
       <br />
       <br />
       <div className="PoseContainer">
-        {filteredPoses.map((pose) => (
-          <span key={pose.id}>
-            <PoseImage key={pose.id} pose={pose} scale={getScale(0.4, dimensions)} />
-            {debugEnabled ? <p>{pose.id}</p> : null}
-          </span>
-        ))}
+        {filteredPoses.length ? (
+          filteredPoses.map((pose) => (
+            <span key={pose.id}>
+              <PoseImage key={pose.id} pose={pose} scale={getScale(0.4, dimensions)} />
+              {debugEnabled ? <p>{pose.id}</p> : null}
+            </span>
+          ))
+        ) : (
+          <p className="EmptyPage">No matching poses found!</p>
+        )}
       </div>
     </div>
   );

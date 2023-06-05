@@ -32,6 +32,7 @@ let savedFlow: Pose[];
 let savedCategories: Category[] = allCategories;
 
 const FlowGenerator = () => {
+  // Get encoded Flow from URL
   const [categories, setCategories] = useState<Category[]>(savedCategories ?? allCategories);
   const filteredPoses = useMemo(() => filterByCategories(poses, categories), [categories]);
   const [activeFlow, setActiveFlow] = useState(savedFlow ?? startFlow());
@@ -41,6 +42,23 @@ const FlowGenerator = () => {
 
   const dimensions = useWindowSizeContext();
   const finalIndex = activeFlow.length - 1;
+  console.log('activ', activeFlow);
+  useEffect(() => {
+    if (!savedFlow?.length) {
+      const urlFlow = new URLSearchParams(window.location.search).get('flow');
+      console.log('flow', urlFlow);
+      if (urlFlow) {
+        console.log('setting');
+        try {
+          const flow = urlFlow.split(',');
+          const urlPoses = flow.map((poseId) => getPoseById(poses, parseInt(poseId)));
+          setActiveFlow(urlPoses);
+        } catch {
+          console.warn('Failed to get flow from URL');
+        }
+      }
+    }
+  }, []);
 
   const regenerateCurrentPose = () => {
     setActiveFlow((currentFlow) => [
@@ -111,6 +129,17 @@ const FlowGenerator = () => {
     };
   }, [activeFlow, categories]);
 
+  const onSharePose = async () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('flow', activeFlow.map((pose) => pose.id).join(','));
+    try {
+      await navigator.clipboard.writeText(url.toString());
+    } catch (e) {
+      setError('Could not copy to clipboard');
+      console.warn('Could not copy to clipboard', e);
+    }
+  };
+
   return (
     <div className="FlowGenerator">
       <div className="TextContainer">
@@ -135,7 +164,7 @@ const FlowGenerator = () => {
           })
         ) : (
           <div>
-            <p className="EmptyFlow">
+            <p className="EmptyPage">
               Start your flow by "Generate Next Pose" or "Pick Next Pose" below!
             </p>
             <br />
@@ -150,6 +179,7 @@ const FlowGenerator = () => {
         next={addNewPose}
         pick={pickNewPose}
         regenerate={regenerateCurrentPose}
+        share={onSharePose}
       />
       <Sheet
         isOpen={posePickerVisible}

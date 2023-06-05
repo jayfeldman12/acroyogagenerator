@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './FlowControls.css';
 
 interface FlowControlProps {
@@ -7,6 +7,7 @@ interface FlowControlProps {
   next: () => void;
   regenerate: () => void;
   pick: () => void;
+  share: () => void;
 }
 
 const FlowControls: React.FC<FlowControlProps> = ({
@@ -15,8 +16,10 @@ const FlowControls: React.FC<FlowControlProps> = ({
   regenerate,
   next,
   pick,
+  share,
 }) => {
   const clearRef = useRef<HTMLButtonElement>(null);
+  const [newPoseSinceShare, setNewPoseSinceShare] = useState(false);
 
   const onNextPosePress = () => {
     window.requestAnimationFrame(() => {
@@ -25,6 +28,12 @@ const FlowControls: React.FC<FlowControlProps> = ({
       clearRef.current?.scrollIntoView({ behavior: 'smooth' });
     });
     next();
+  };
+
+  const onPressShareFlow = () => {
+    setNewPoseSinceShare(true);
+    share();
+    setTimeout(() => setNewPoseSinceShare(false), 3000);
   };
 
   return (
@@ -42,6 +51,9 @@ const FlowControls: React.FC<FlowControlProps> = ({
       <br />
       <br />
       <div>
+        <button className="Button" id="Share" onClick={onPressShareFlow}>
+          {newPoseSinceShare ? 'Copied to clipboard!' : 'Share flow'}
+        </button>
         <button className="Button DeleteButton" id="Delete" onClick={deletePose}>
           Delete Current Pose
         </button>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import CategoryFilter from '../components/CategoryFilter';
 import PoseImage from '../components/PoseImage';
 import { Category, allCategories } from '../components/models/categories';
@@ -19,9 +19,12 @@ const getRandomPose = (potentialPoses = poses): Pose => {
 const defaultReloadWidth = 300;
 const defaultReloadHeight = 50;
 
+let initialPose = getRandomPose();
+let initialCategories = allCategories;
+
 const PoseGenerator = () => {
-  const [activePose, setActivePose] = useState(getRandomPose());
-  const [categories, setCategories] = useState<Category[]>(allCategories);
+  const [activePose, setActivePose] = useState(initialPose);
+  const [categories, setCategories] = useState<Category[]>(initialCategories);
   const filteredPoses = useMemo(() => filterByCategories(poses, categories), [categories]);
   const dimensions = useWindowSizeContext();
   const { windowWidth } = dimensions;
@@ -41,6 +44,13 @@ const PoseGenerator = () => {
     defaultReloadHeight,
     windowWidth
   );
+
+  useEffect(() => {
+    return () => {
+      initialPose = activePose;
+      initialCategories = categories;
+    };
+  }, [activePose, categories]);
 
   return (
     <div className="PoseGenerator">
