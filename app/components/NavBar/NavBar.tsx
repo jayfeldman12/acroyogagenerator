@@ -9,7 +9,7 @@ type Route = {
 
 const routes: Route[] = [
   { name: 'Pose generator', href: '/poseGenerator' },
-  { name: 'Flow generator', href: '/flowGenerator' },
+  { name: 'Create-A-Flow', href: '/flowGenerator' },
   { name: 'All poses', href: '/poses' },
 ];
 

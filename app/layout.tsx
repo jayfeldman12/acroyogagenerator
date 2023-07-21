@@ -1,3 +1,4 @@
+import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
 import { WindowSizeContext } from './context/WindowSizeContext';
 import './index.css';
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <WindowSizeContext>
           <NavBar />
           {children}
+          <Footer />
         </WindowSizeContext>
       </body>
     </html>
