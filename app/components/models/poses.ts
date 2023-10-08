@@ -26,7 +26,7 @@ export const poses: Pose[] = [
   {
     category: 'easy',
     id: 1,
-    name: 'Bird / Plank',
+    name: 'Bird / plank',
     path: '001',
     transitions: [7, 8, 9, 14, 24, 28, 30, 33, 35, 37, 41, 44, 45, 46, 47, 58, 64, 71, 74, 75],
   },
